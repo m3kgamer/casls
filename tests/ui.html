@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>UI harness (mock API)</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="importmap">{"imports":{"http://localhost:5173/js/api.js":"http://localhost:5173/tests/mock-api.js"}}</script>
+</head>
+<body>
+  <!-- Same markup as index.html, but js/api.js is swapped for an in-memory mock via the import map. -->
+  <div id="boot" class="center-screen"><div class="spinner"></div></div>
+  <main id="setup" class="center-screen" hidden><div class="auth-card"><h1 data-i18n="setup.title"></h1><p data-i18n="setup.text"></p><p class="hint" id="setup-extra"></p></div></main>
+  <main id="auth" class="center-screen" hidden>
+    <div class="auth-card"><h1 id="auth-title"></h1><form id="auth-form"><input id="auth-email"><input id="auth-pass"><p id="auth-msg" hidden></p><button id="auth-submit"></button></form><button id="auth-switch"></button><select id="auth-lang"></select></div>
+  </main>
+  <div id="app" hidden>
+    <aside class="sidebar"><div class="brand"><span class="logo"></span><span data-i18n="app.name"></span></div><nav id="side-nav"></nav></aside>
+    <main id="view" tabindex="-1"></main>
+    <nav id="bottom-nav" class="bottom-nav"></nav>
+  </div>
+  <div id="modals"></div><div id="toasts"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

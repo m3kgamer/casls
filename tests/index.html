@@ -1,0 +1,12 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Core tests</title>
+<pre id="out"></pre>
+<script type="importmap">{"imports":{"node:assert/strict":"./assert-shim.js"}}</script>
+<script type="module">
+  const out = document.getElementById('out');
+  const log = console.log;
+  console.log = (...a) => { out.textContent += a.join(' ') + '\n'; log(...a); };
+  try { await import('./core.test.mjs'); window.__done = 'PASS'; }
+  catch (e) { out.textContent += 'FAIL: ' + e.message + '\n'; window.__done = 'FAIL'; }
+</script>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f7a4f">
+  <title>Smart Calorie Tracker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230f7a4f'/%3E%3Cpath d='M6 18c0-7 4-11 12-11 0 8-4 12-11 12M6 18c2-4 5-6 8-7' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="boot" class="center-screen"><div class="spinner" role="status" aria-label="Loading"></div></div>
+  <script>
+    // Browsers block ES modules on file:// — tell the user instead of spinning forever.
+    if (location.protocol === 'file:') {
+      document.getElementById('boot').innerHTML = '<div class="auth-card" dir="auto"><h1>Open via a local server</h1><p>Double-clicking index.html cannot work (browser security).<br>Double-click <b>start.bat</b> in this folder, then use http://localhost:5173<br><br>افتح الملف <b>start.bat</b> بدل index.html ثم استعمل http://localhost:5173</p></div>';
+    }
+  </script>
+
+  <main id="setup" class="center-screen" hidden>
+    <div class="auth-card">
+      <h1 data-i18n="setup.title">Connect Supabase</h1>
+      <p data-i18n="setup.text">Open js/config.js and set SUPABASE_URL and SUPABASE_KEY (publishable key), then reload. See README.md.</p>
+      <p class="hint" id="setup-extra"></p>
+    </div>
+  </main>
+
+  <main id="auth" class="center-screen" hidden>
+    <div class="auth-card">
+      <div class="brand big"><span class="logo"></span><span data-i18n="app.name">Smart Calorie Tracker</span></div>
+      <h1 id="auth-title"></h1>
+      <form id="auth-form" novalidate>
+        <label class="field"><span data-i18n="auth.email">Email</span><input id="auth-email" type="email" autocomplete="email" dir="ltr" required></label>
+        <label class="field"><span data-i18n="auth.password">Password</span><input id="auth-pass" type="password" minlength="6" dir="ltr" required></label>
+        <p id="auth-msg" class="form-msg" role="alert" hidden></p>
+        <button id="auth-submit" class="btn primary block" type="submit"></button>
+      </form>
+      <button id="auth-switch" class="link center" type="button"></button>
+      <label class="field inline"><span data-i18n="set.language">Language</span><select id="auth-lang"></select></label>
+    </div>
+  </main>
+
+  <div id="app" hidden>
+    <aside class="sidebar">
+      <div class="brand"><span class="logo"></span><span data-i18n="app.name">Smart Calorie Tracker</span></div>
+      <nav id="side-nav" aria-label="Main"></nav>
+    </aside>
+    <main id="view" tabindex="-1"></main>
+    <nav id="bottom-nav" class="bottom-nav" aria-label="Main"></nav>
+  </div>
+
+  <div id="modals"></div>
+  <div id="toasts" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
